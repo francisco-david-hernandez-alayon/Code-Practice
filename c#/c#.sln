@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "soap", "soap", "{5B3BF4BA-8F03-09A1-1ACB-9C8E46F0E031}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoapServiceDemo", "soap\SoapServiceDemo\SoapServiceDemo.csproj", "{EB49B4E1-7649-6F0C-1E29-65723B84979A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB49B4E1-7649-6F0C-1E29-65723B84979A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB49B4E1-7649-6F0C-1E29-65723B84979A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB49B4E1-7649-6F0C-1E29-65723B84979A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB49B4E1-7649-6F0C-1E29-65723B84979A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EB49B4E1-7649-6F0C-1E29-65723B84979A} = {5B3BF4BA-8F03-09A1-1ACB-9C8E46F0E031}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2EC99FFA-85A5-404E-9A5D-407578E4F757}
+	EndGlobalSection
+EndGlobal
