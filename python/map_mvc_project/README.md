@@ -57,6 +57,11 @@ pip install -r requirements.txt
   
 <br>
 
+
+## APIS usadas
+[earthquake](https://earthquake.usgs.gov/fdsnws/event/1/)
+
+
 ## Ejecutar aplicación en linux
 Activar entorno virtual
 ```

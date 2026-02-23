@@ -1,10 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mapa MVC</title>
+    <title>EartQuake Map</title>
 </head>
+
 <body>
-    <h1>Mapa interactivo</h1>
-    {{ map|safe }}
+
+<h2>Filters</h2>
+
+<form method="get">
+
+<label>Start date:</label>
+<input type="date" name="start_date">
+
+<label>End date:</label>
+<input type="date" name="end_date">
+
+
+<br><br>
+
+<label>Severity:</label>
+<select name="severity">
+    <option value="">Todos</option>
+    <option value="MICRO">Micro</option>
+    <option value="LIGHT">Light</option>
+    <option value="MODERATE">Moderate</option>
+    <option value="STRONG">Strong</option>
+    <option value="VERY_STRONG">Very Strong</option>
+</select>
+
+<br><br>
+
+<button type="submit">Search</button>
+
+<div style="margin-bottom:15px; font-size:14px;">
+
+<strong>Results found:</strong> {{ quake_count or 0 }} earthquakes
+
+</div>
+
+</form>
+
+<hr>
+
+<!-- MAP -->
+<div style="margin-bottom:15px; font-size:14px;">
+
+    <strong>Searching for earthquakes from:</strong>
+
+    {{ request.query_params.get('date') or 'último rango' }}
+
+    <strong> to </strong>
+
+    {{ request.query_params.get('end_date') or 'hoy' }}
+
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+
+    <strong>Current date:</strong>
+    {{ request.query_params.get('today') or '' }}
+
+</div>
+
+{{ map|safe }}
+
 </body>
 </html>
