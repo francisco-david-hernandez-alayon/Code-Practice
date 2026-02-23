@@ -1,6 +1,8 @@
 # Proyecto python
 Autor: Francisco David Hernández Alayón
 
+![V1 APP](images/v1-app.png)
+
 <br>
 
 ## Configuración de proyecto en linux
