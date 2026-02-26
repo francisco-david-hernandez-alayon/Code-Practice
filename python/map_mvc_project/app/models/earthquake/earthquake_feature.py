@@ -4,7 +4,7 @@ from typing import List, Optional
 
 class Geometry(BaseModel):
     type: str
-    coordinates: List[float]  # [longitude, latitude, depth]
+    coordinates: List[Optional[float]] # [longitude, latitude, depth]
 
 
 class Properties(BaseModel):

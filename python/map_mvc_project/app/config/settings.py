@@ -1,1 +1,2 @@
 EARTHQUAKE_API_BASE_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson"
+TECTONIC_PLATES_URL = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"

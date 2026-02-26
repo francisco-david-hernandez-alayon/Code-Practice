@@ -13,17 +13,11 @@ SEVERITY_COLOR_MAP = {
 }
 
 
-from folium.plugins import MarkerCluster
-
-
 def add_markers(map_object, quake_points):
 
-    marker_cluster = MarkerCluster(
-        max_cluster_radius=20,
-        spiderfy_distance_multiplier=2
-    ).add_to(map_object)
-
     for quake in quake_points:
+        severity = EarthquakeMapper.get_severity(quake.magnitude)
+        color = SEVERITY_COLOR_MAP.get(severity, "gray")
 
         text = f"""
         Magnitude: {quake.magnitude or 'N/A'}<br>
@@ -34,8 +28,26 @@ def add_markers(map_object, quake_points):
         folium.CircleMarker(
             location=[quake.latitude, quake.longitude],
             radius=5,
-            color="red",
+            color=color,
             fill=True,
-            fill_color="red",
+            fill_color=color,
+            fill_opacity=0.7,
             tooltip=text
-        ).add_to(marker_cluster)
+        ).add_to(map_object)
+
+
+def add_lines(map_object, plate_data):
+
+    for feature in plate_data.features:
+
+        geometry = feature.geometry
+
+        if geometry.type != "LineString":
+            continue
+
+        folium.PolyLine(
+            locations=[(lat, lon) for lon, lat in geometry.coordinates],
+            weight=2,
+            color="blue",
+            opacity=0.6
+        ).add_to(map_object)

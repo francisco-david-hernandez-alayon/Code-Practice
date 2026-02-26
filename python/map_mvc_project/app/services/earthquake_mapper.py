@@ -6,9 +6,6 @@ from app.models.quake.quake_severity import QuakeSeverity
 
 class EarthquakeMapper:
 
-    from datetime import datetime
-
-
     @staticmethod
     def earthQuaketimestamp_to_date(timestamp: int) -> str:
         if timestamp is None:
@@ -37,7 +34,26 @@ class EarthquakeMapper:
             return QuakeSeverity.STRONG
 
         return QuakeSeverity.VERY_STRONG
+    
+    @staticmethod
+    def get_magnitude_range(severity: QuakeSeverity):
 
+        # ensure QuakeSeverity enum
+        if isinstance(severity, str):
+            severity = QuakeSeverity(severity)
+
+        if severity == QuakeSeverity.MICRO:
+            return (0, 2.4)
+        if severity == QuakeSeverity.LIGHT:
+            return (2.5, 3.9)
+        if severity == QuakeSeverity.MODERATE:
+            return (4.0, 5.4)
+        if severity == QuakeSeverity.STRONG:
+            return (5.5, 6.9)
+        if severity == QuakeSeverity.VERY_STRONG:
+            return (7.0, None)
+
+        return (None, None)
 
     @staticmethod
     def to_quake_points(earthquake_data: EarthquakeData):
@@ -45,21 +61,35 @@ class EarthquakeMapper:
         points = []
 
         for feature in earthquake_data.features:
+            
+            try:
+                coords = feature.geometry.coordinates
 
-            coords = feature.geometry.coordinates
+                if not coords or len(coords) < 2:
+                    print(f"invalid coordinade(len < 2)")
+                    continue
 
-            # GeoJSON order = [lon, lat, depth]
-            longitude = coords[0]
-            latitude = coords[1]
+                # GeoJSON order = [lon, lat, depth]
+                longitude = float(coords[0]) if coords[0] is not None else None
+                latitude = float(coords[1]) if coords[1] is not None else None
+                
+                if longitude is None or latitude is None: # Skip invalid coordinates
+                    print(f"invalid coordinade: {longitude}, {latitude}")
+                    continue
 
-            points.append(
-                QuakePoint(
-                    latitude=latitude,
-                    longitude=longitude,
-                    magnitude=feature.properties.mag,
-                    place=feature.properties.place,
-                    date=EarthquakeMapper.earthQuaketimestamp_to_date(feature.properties.time) 
+                points.append(
+                    QuakePoint(
+                        latitude=latitude,
+                        longitude=longitude,
+                        magnitude=feature.properties.mag,
+                        place=feature.properties.place,
+                        date=EarthquakeMapper.earthQuaketimestamp_to_date(feature.properties.time) 
+                    )
                 )
-            )
+
+            except Exception as e:
+                print(f"Error transforming point: " + e)
+                continue
+
 
         return points
