@@ -1,7 +1,7 @@
 # Proyecto python
 Autor: Francisco David Hernández Alayón
 
-![V1 APP](images/v1-app.png)
+![V1 APP](images/v2-app.png)
 
 <br>
 
